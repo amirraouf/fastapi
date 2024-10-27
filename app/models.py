@@ -1,12 +1,12 @@
 import enum
-from datetime import datetime
-from datetime import timezone
+from datetime import datetime, timezone
 
 from sqlalchemy import Column
 from sqlalchemy import DateTime
 from sqlalchemy import Enum
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
+from sqlalchemy import REAL
 from sqlalchemy import String
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import relationship
@@ -23,7 +23,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True, nullable=False)
-    balance = Column(Integer, nullable=False)
+    balance = Column(REAL(precision=18, decimal_return_scale=2), nullable=False)
 
     def __repr__(self) -> str:
         return f"<User(id={self.id}, username={self.username}, balance={self.balance})>"
@@ -39,10 +39,11 @@ class Transfer(Base):
     __tablename__ = "transfers"
 
     id = Column(Integer, primary_key=True)
-    # FIXME: There's a bug with both created_at and updated_at fields, can you fix it?
     created_at = Column(DateTime, nullable=False, default=datetime.now(timezone.utc))
-    updated_at = Column(DateTime, nullable=False, default=datetime.now(timezone.utc))
-    amount = Column(Integer, nullable=False)
+    updated_at = Column(
+        DateTime, nullable=False, default=datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc)
+    )
+    amount = Column(REAL(precision=18, decimal_return_scale=2), nullable=False)
     status = Column(
         Enum(TransferStatusEnum), nullable=False, default=TransferStatusEnum.PENDING
     )

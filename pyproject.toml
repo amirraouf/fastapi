@@ -4,13 +4,20 @@ version = "1.0.0"
 description = ""
 authors = ["Ali <ali@thndr.app>"]
 readme = "README.md"
+packages = [
+    { include = "app" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = {extras = ["standard"], version = "^0.112.2"}
 SQLAlchemy = "^2.0.32"
 alembic = "^1.13.2"
+option = "2.1.0"
 
+[tool.poetry.dev-dependencies]
+pytest = "^7.0.1"
+ipdb = "^0.13.13"
 
 [build-system]
 requires = ["poetry-core"]

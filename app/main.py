@@ -7,13 +7,13 @@ from app.dependencies.get_current_user import get_current_user
 from app.models import Transfer
 from app.models import TransferStatusEnum
 from app.models import User
-from app.pydantic_models import Transfer as TransferPydantic
+from app.pydantic_models import Transfer as TransferValidator
 
 
 app = FastAPI()
 
 
-@app.get("/transfers", response_model=list[TransferPydantic])
+@app.get("/transfers", response_model=list[TransferValidator])
 async def list_transfers(
     current_user: User = Depends(get_current_user),
     status: TransferStatusEnum = TransferStatusEnum.PENDING,
