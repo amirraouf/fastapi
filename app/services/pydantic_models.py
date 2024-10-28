@@ -1,4 +1,6 @@
+from enum import Enum
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -12,6 +14,10 @@ class User(BaseModel):
     class Config:
         from_attributes = True
 
+class TransferLabel(str, Enum):
+    sending = 'sending'
+    receiving = 'receiving'
+
 
 class Transfer(BaseModel):
     id: int
@@ -21,6 +27,7 @@ class Transfer(BaseModel):
     updated_at: datetime
     sender: User
     receiver: User
+    label: Optional[TransferLabel]
 
     class Config:
         from_attributes = True
