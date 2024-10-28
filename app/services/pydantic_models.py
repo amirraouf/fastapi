@@ -14,12 +14,8 @@ class User(BaseModel):
     class Config:
         from_attributes = True
 
-class TransferLabel(str, Enum):
-    sending = 'sending'
-    receiving = 'receiving'
 
-
-class Transfer(BaseModel):
+class TransferValidator(BaseModel):
     id: int
     status: TransferStatusEnum
     amount: int
@@ -27,7 +23,6 @@ class Transfer(BaseModel):
     updated_at: datetime
     sender: User
     receiver: User
-    label: Optional[TransferLabel]
 
     class Config:
         from_attributes = True
