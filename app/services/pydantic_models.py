@@ -1,6 +1,5 @@
-from enum import Enum
 from datetime import datetime
-from typing import Optional
+from decimal import Decimal
 
 from pydantic import BaseModel
 
@@ -18,7 +17,7 @@ class User(BaseModel):
 class TransferValidator(BaseModel):
     id: int
     status: TransferStatusEnum
-    amount: int
+    amount: Decimal
     created_at: datetime
     updated_at: datetime
     sender: User
@@ -26,3 +25,10 @@ class TransferValidator(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class TransferPageValidator(BaseModel):
+    page: int
+    limit: int
+    transfers: list[TransferValidator]
+    total_transfers: int
