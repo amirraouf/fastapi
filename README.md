@@ -1,4 +1,4 @@
-# Backend Task
+# Backend application tut for fastapi
 
 This exercise involves building a FastAPI app that will serve an API. We expected you should spend around 3 hours to implement it.
 
