@@ -9,6 +9,7 @@ dist/**
 .idea/workspace.xml
 .idea/misc.xml
 .idea/QR_claims.iml
+.idea/*
 .idea/**
 .idea/**/**
 

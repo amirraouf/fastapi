@@ -6,9 +6,9 @@ def custom_openapi(app):
         if app.openapi_schema:
             return app.openapi_schema
         openapi_schema = get_openapi(
-            title="thndr-be-task",
+            title="bE app",
             version="1.0.0",
-            description="This is a test task for Thndr",
+            description="app for tut fastapi",
             routes=app.routes,
         )
         user_header = {
