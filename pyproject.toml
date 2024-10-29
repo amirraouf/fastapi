@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "thndr-be-task"
+name = "be task"
 version = "1.0.0"
 description = ""
-authors = ["Ali <ali@thndr.app>"]
+authors = ["Amir <amir2raouf@gmail.com>"]
 readme = "README.md"
 packages = [
     { include = "app" }
