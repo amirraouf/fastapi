@@ -23,7 +23,11 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True, nullable=False)
-    balance = Column(sqlite.REAL(precision=18, decimal_return_scale=2), nullable=False, default=Decimal(0))
+    balance = Column(
+        sqlite.REAL(precision=18, decimal_return_scale=2),
+        nullable=False,
+        default=Decimal(0),
+    )
 
     def __repr__(self) -> str:
         return f"<User(id={self.id}, username={self.username}, balance={self.balance})>"
@@ -41,9 +45,16 @@ class Transfer(Base):
     id = Column(Integer, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.now(timezone.utc))
     updated_at = Column(
-        DateTime, nullable=False, default=datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc)
+        DateTime,
+        nullable=False,
+        default=datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
     )
-    amount = Column(sqlite.REAL(precision=18, decimal_return_scale=2), nullable=False, default=Decimal(0))
+    amount = Column(
+        sqlite.REAL(precision=18, decimal_return_scale=2),
+        nullable=False,
+        default=Decimal(0),
+    )
     status = Column(
         Enum(TransferStatusEnum), nullable=False, default=TransferStatusEnum.PENDING
     )

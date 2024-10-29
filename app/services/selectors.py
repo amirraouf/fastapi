@@ -3,13 +3,12 @@ from sqlalchemy.orm import joinedload
 from app.models import Transfer, TransferStatusEnum, User
 
 
-def count_transfers_by_user(session, user: User, status: TransferStatusEnum = None) -> int:
-    filters = (
-        (Transfer.sender_id == user.id)
-        | (Transfer.receiver_id == user.id)
-    )
+def count_transfers_by_user(
+    session, user: User, status: TransferStatusEnum = None
+) -> int:
+    filters = (Transfer.sender_id == user.id) | (Transfer.receiver_id == user.id)
     if status:
-        filters &= (Transfer.status == status)
+        filters &= Transfer.status == status
 
     qry = (
         session.query(
@@ -32,13 +31,10 @@ def list_transfers(
     """
     List transfers for a user with a given status associated with label "sending" or "receiving".
     """
-    filters = (
-        (Transfer.sender_id == user.id)
-        | (Transfer.receiver_id == user.id)
-    )
+    filters = (Transfer.sender_id == user.id) | (Transfer.receiver_id == user.id)
 
     if status:
-        filters &= (Transfer.status == status)
+        filters &= Transfer.status == status
 
     transactions = (
         session.query(

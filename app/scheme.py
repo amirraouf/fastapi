@@ -1,5 +1,5 @@
-
 from fastapi.openapi.utils import get_openapi
+
 
 def custom_openapi(app):
     def wrapper():
@@ -12,15 +12,15 @@ def custom_openapi(app):
             routes=app.routes,
         )
         user_header = {
-                            "name": "user_id",
-                            "in": "header",
-                            "required": True,
-                            "schema": {
-                                "type": "integer",
-                                "example": "1",
-                            },
-                            "type": "integer",
-                        }
+            "name": "user_id",
+            "in": "header",
+            "required": True,
+            "schema": {
+                "type": "integer",
+                "example": "1",
+            },
+            "type": "integer",
+        }
         paths = openapi_schema["paths"]
         for key in paths.keys():
             path = paths[key]
@@ -30,4 +30,5 @@ def custom_openapi(app):
                 path["post"]["parameters"].append(user_header)
 
         return openapi_schema
+
     return wrapper
